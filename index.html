@@ -81,15 +81,16 @@
         }
 
         .section {
-            margin-bottom: 24px;
+            margin-bottom: 10px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
             font-weight: 500;
             font-size: 0.9rem;
             color: var(--text-dim);
+            margin-top: 15px;
         }
 
         input,
@@ -104,6 +105,7 @@
             font-size: 1rem;
             box-sizing: border-box;
             transition: border-color 0.2s;
+            margin-bottom: 15px;
         }
 
         input:focus,
@@ -123,6 +125,7 @@
             cursor: pointer;
             transition: background 0.2s, transform 0.1s;
             margin-top: 10px;
+            margin-bottom: 0;
         }
 
         button:hover {
@@ -178,9 +181,9 @@
 
         #status {
             font-size: 0.9rem;
-            padding: 12px;
+            padding: 0;
             border-radius: 8px;
-            margin-top: 10px;
+            margin-top: 5px;
             text-align: center;
         }
     </style>
@@ -226,7 +229,7 @@
                 <input type="text" id="pointId" placeholder="Click 'Edit' on a chunk above">
 
                 <label>New Content</label>
-                <textarea id="newContent" rows="5" placeholder="Enter new content here..."></textarea>
+                <textarea id="newContent" rows="15" placeholder="Enter new content here..."></textarea>
 
                 <button id="submitBtn" onclick="sendOverwrite()">Apply Overwrite</button>
                 <p id="status"></p>
