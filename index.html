@@ -7,10 +7,10 @@
     <title>Qdrant Overwrite Tool</title>
     <style>
         :root {
-            --primary: #309170;
-            --primary-hover: #1b5743;
-            --bg: #161817;
-            --card-bg: #2A2D35;
+            --primary: #00B894;
+            --primary-hover: #298063;
+            --bg: #000000;
+            --card-bg: #111111;
             --text: #f8fafc;
             --text-dim: #94a3b8;
             --border: #335547;
@@ -27,20 +27,34 @@
             padding: 40px 20px;
         }
 
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(48, 145, 112, 0.3));
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
         .header {
             width: 100%;
             max-width: 800px;
             text-align: center;
             padding: 20px 0 40px 0;
             border-bottom: 1px solid var(--border);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .header h1 {
             color: var(--primary);
             margin: 0;
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 800;
             letter-spacing: -0.5px;
         }
 
@@ -83,7 +97,7 @@
         textarea {
             width: 100%;
             padding: 12px;
-            background: #1a1f1d;
+            background: #141a18;
             border: 1px solid var(--border);
             border-radius: 8px;
             color: white;
@@ -169,22 +183,12 @@
             margin-top: 10px;
             text-align: center;
         }
-
-        #newContent {
-            min-height: 250px;
-            line-height: 1.6;
-            padding: 16px;
-            margin-bottom: 15px;
-        }
-
-        .label-spacing {
-            margin-top: 15px;
-        }
     </style>
 </head>
 
 <body>
-    <div class="header">
+    <div class="header header-flex">
+        <img src="SOFI_Logo_Full_White.png" alt="SOFI Logo" class="logo">
         <h1>Qdrant Overwrite Tool</h1>
     </div>
 
@@ -221,8 +225,8 @@
                 <label>Point ID (Target)</label>
                 <input type="text" id="pointId" placeholder="Click 'Edit' on a chunk above">
 
-                <label class="label-spacing">New Content</label>
-                <textarea id="newContent" rows="12" placeholder="Enter new content here..."></textarea>
+                <label>New Content</label>
+                <textarea id="newContent" rows="5" placeholder="Enter new content here..."></textarea>
 
                 <button id="submitBtn" onclick="sendOverwrite()">Apply Overwrite</button>
                 <p id="status"></p>

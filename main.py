@@ -61,6 +61,11 @@ async def read_script():
     print("Serving script.js")
     return FileResponse(os.path.join(BASE_DIR, "script.js"))
 
+@app.get("/SOFI_Logo_Full_White.png")
+async def read_logo():
+    print("Serving logo")
+    return FileResponse(os.path.join(BASE_DIR, "SOFI_Logo_Full_White.png"))
+
 @app.get("/get_all_filenames")
 async def get_all_filenames():
     print("Fetching all filenames...")
