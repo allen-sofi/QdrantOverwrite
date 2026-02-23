@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qdrant Overwrite Tool</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .chunk-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chunk-item {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .chunk-id {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .chunk-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-dim);
+            white-space: pre-wrap;
+        }
+
+        .chunk-actions {
+            margin-top: 12px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .edit-btn {
+            width: auto;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            margin-top: 0;
+            background: #334155;
+        }
+
+        #status {
+            font-size: 0.9rem;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 1. Fetch Filenames -->
+        <div class="card">
+            <h2>1. Select Document</h2>
+            <div class="section">
+                <button onclick="fetchFilenames()">Load All Filenames</button>
+                <div id="filenameContainer" style="margin-top: 15px; display: none;">
+                    <label for="filenameSelect">Choose a file:</label>
+                    <select id="filenameSelect" onchange="document.getElementById('fileNameInput').value = this.value">
+                        <option value="">-- Select a file --</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Scroll/Search -->
+        <div class="card">
+            <h2>2. Explore Content</h2>
+            <div class="section">
+                <label>Filename</label>
+                <input type="text" id="fileNameInput" placeholder="Enter or select filename...">
+                <button onclick="scrollFile()">Search Chunks</button>
+            </div>
+            <div id="chunkList" class="chunk-list"></div>
+        </div>
+
+        <!-- 3. Overwrite Form -->
+        <div class="card" id="editCard">
+            <h2>3. Edit Chunk</h2>
+            <div class="section">
+                <label>Point ID (Target)</label>
+                <input type="text" id="pointId" placeholder="Click 'Edit' on a chunk above">
+
+                <label>New Content</label>
+                <textarea id="newContent" rows="5" placeholder="Enter new content here..."></textarea>
+
+                <button id="submitBtn" onclick="sendOverwrite()">Apply Overwrite</button>
+                <p id="status"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
