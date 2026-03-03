@@ -20,7 +20,7 @@ qdrant_client = QdrantClient(
     api_key=os.getenv("QDRANT_API_KEY")
 )
 
-COLLECTION_NAME = "HomeAlong Backend Run 5"
+COLLECTION_NAME = "HomeAlong OCR Run 3"
 
 # Ensure the payload index exists
 try:
